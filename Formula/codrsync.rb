@@ -1,4 +1,6 @@
 class Codrsync < Formula
+  include Language::Python::Virtualenv
+
   desc "AI-powered development orchestrator - Turn any dev into jedi ninja codr"
   homepage "https://codrsync.dev"
   url "https://files.pythonhosted.org/packages/source/c/codrsync/codrsync-1.0.0.tar.gz"
@@ -8,8 +10,17 @@ class Codrsync < Formula
   depends_on "python@3.12"
 
   def install
-    # Use pip to install directly
-    system "python3.12", "-m", "pip", "install", "--prefix=#{prefix}", "codrsync==1.0.0"
+    # Create virtualenv manually since pip module may not be available
+    venv = virtualenv_create(libexec, "python3.12")
+
+    # Download and install pip in the venv first
+    system libexec/"bin/python", "-m", "ensurepip", "--upgrade"
+
+    # Install codrsync from PyPI
+    system libexec/"bin/pip", "install", "codrsync==1.0.0"
+
+    # Link the binary
+    bin.install_symlink libexec/"bin/codrsync"
   end
 
   def caveats
