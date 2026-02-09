@@ -1,8 +1,8 @@
 class Codrsync < Formula
   desc "Your AI's AI - Context engineering made simple"
   homepage "https://codrsync.dev"
-  url "https://files.pythonhosted.org/packages/source/c/codrsync/codrsync-1.1.0.tar.gz"
-  sha256 "8c4d17a24889a4bf1346359ef9db1c9b2ac557fa96369af686efbb85ee377eef"
+  url "https://files.pythonhosted.org/packages/b6/6b/046bf48361fcbacdaa511c56a5cc63d3c3f49e3aeabda2b4b4f351a1d4f1/codrsync-1.1.2.tar.gz"
+  sha256 "0fd1d1e1d80975e81afedcbcf3cccdb9477444d68ac2246f90b8dd262c457f25"
   license "MIT"
 
   depends_on "pipx"
@@ -11,7 +11,7 @@ class Codrsync < Formula
     # Create wrapper script that uses pipx run
     (bin/"codrsync").write <<~EOS
       #!/bin/bash
-      exec pipx run codrsync==1.1.0 "$@"
+      exec pipx run codrsync==1.1.2 "$@"
     EOS
   end
 
